@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'mvn test'
+        sh 'java -cp /home/GitHub/petclinic_pipeline/hellocucumber-1.0.0-SNAPSHOT.jar'
       }
 
       post {
