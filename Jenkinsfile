@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'java -jar /home/GitHub/petclinic_pipeline/hellocucumber-1.0.0-SNAPSHOT.jar cucumber.api.cli.Main'
+        sh 'java -cp hellocucumber-tests.jar cuketest.RunCukesTest'
       }
 
       post {
