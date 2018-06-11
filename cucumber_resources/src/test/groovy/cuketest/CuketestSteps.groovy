@@ -19,7 +19,7 @@ Before("@browser"){
 
 
 Given(~"Open Firefox and launch the application") {->
-	driver.get("http://localhost:8080/")
+	driver.get("http://localhost:8090/")
 }
 
 
