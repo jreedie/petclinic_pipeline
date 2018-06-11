@@ -6,15 +6,15 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 
 import static org.junit.Assert.*;
 
-import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 import org.springframework.samples.petclinic.model.Person
 
-FirefoxDriver driver;
+HtmlUnitDriver driver;
 
 Before("@browser"){
 	System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
-	driver = new FirefoxDriver();
+	driver = new HtmlUnitDriver();
 }
 
 

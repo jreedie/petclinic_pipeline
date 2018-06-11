@@ -74,7 +74,8 @@ dependencies {
     cucumberRuntime files("${jar.archivePath}")
 
     testCompile 'junit:junit:4.11'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.12.0'
+    //testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.12.0'
+    testCompile group: "org.seleniumhq.selenium", name: 'selenium-htmlunit-driver', version: '2.52.0'
     testCompile "info.cukes:cucumber-junit:$cucumberVersion"
     testCompile "info.cukes:cucumber-groovy:$cucumberVersion"
 }
