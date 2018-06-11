@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.springframework.samples.petclinic.owner.OwnerControllerTests" tests="11" skipped="0" failures="0" errors="0" timestamp="2018-06-11T18:05:34" hostname="mikegajda-VirtualBox" time="0.734">
+  <properties/>
+  <testcase name="testProcessUpdateOwnerFormHasErrors" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.277"/>
+  <testcase name="testProcessCreationFormSuccess" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.015"/>
+  <testcase name="testInitFindForm" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.078"/>
+  <testcase name="testShowOwner" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.08"/>
+  <testcase name="testInitUpdateOwnerForm" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.042"/>
+  <testcase name="testInitCreationForm" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.036"/>
+  <testcase name="testProcessFindFormByLastName" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.011"/>
+  <testcase name="testProcessFindFormNoOwnersFound" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.051"/>
+  <testcase name="testProcessFindFormSuccess" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.044"/>
+  <testcase name="testProcessUpdateOwnerFormSuccess" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.021"/>
+  <testcase name="testProcessCreationFormHasErrors" classname="org.springframework.samples.petclinic.owner.OwnerControllerTests" time="0.034"/>
+  <system-out><![CDATA[2018-06-11 14:05:33.437  INFO 5034 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.springframework.samples.petclinic.owner.OwnerControllerTests], using SpringBootContextLoader
+2018-06-11 14:05:33.439  INFO 5034 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.springframework.samples.petclinic.owner.OwnerControllerTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2018-06-11 14:05:33.440  INFO 5034 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.springframework.samples.petclinic.owner.OwnerControllerTests]: OwnerControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2018-06-11 14:05:33.493  INFO 5034 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.springframework.samples.petclinic.PetClinicApplication for test class org.springframework.samples.petclinic.owner.OwnerControllerTests
+2018-06-11 14:05:33.504  INFO 5034 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-06-11 14:05:33.506  INFO 5034 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@63fb242f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1b7433a9, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@524323ea, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5ea21c7, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3f8ab709, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5d9222a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4ece1d08, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1afef90f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@70a637a6, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3c2283ea, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2baff3b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6f6158e2]
+
+
+              |\      _,,,--,,_
+             /,`.-'`'   ._  \-;;,_
+  _______ __|,4-  ) )_   .;.(__`'-'__     ___ __    _ ___ _______
+ |       | '---''(_/._)-'(_\_)   |   |   |   |  |  | |   |       |
+ |    _  |    ___|_     _|       |   |   |   |   |_| |   |       | __ _ _
+ |   |_| |   |___  |   | |       |   |   |   |       |   |       | \ \ \ \
+ |    ___|    ___| |   | |      _|   |___|   |  _    |   |      _|  \ \ \ \
+ |   |   |   |___  |   | |     |_|       |   | | |   |   |     |_    ) ) ) )
+ |___|   |_______| |___| |_______|_______|___|_|  |__|___|_______|  / / / /
+ ==================================================================/_/_/_/
+
+:: Built with Spring Boot :: 2.0.2.RELEASE
+
+
+2018-06-11 14:05:33.604  INFO 5034 --- [    Test worker] o.s.s.p.owner.OwnerControllerTests       : Starting OwnerControllerTests on mikegajda-VirtualBox with PID 5034 (started by mikegajda in /home/mikegajda/Documents/spring-examples/cucumber-test/petclinic_pipeline)
+2018-06-11 14:05:33.608  INFO 5034 --- [    Test worker] o.s.s.p.owner.OwnerControllerTests       : The following profiles are active: production
+2018-06-11 14:05:33.615  INFO 5034 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@204c9f2: startup date [Mon Jun 11 14:05:33 EDT 2018]; root of context hierarchy
+2018-06-11 14:05:34.193  INFO 5034 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-11 14:05:34.368  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@204c9f2: startup date [Mon Jun 11 14:05:33 EDT 2018]; root of context hierarchy
+2018-06-11 14:05:34.398  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/new],methods=[POST]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult)
+2018-06-11 14:05:34.402  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/find],methods=[GET]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.initFindForm(java.util.Map<java.lang.String, java.lang.Object>)
+2018-06-11 14:05:34.404  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners],methods=[GET]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map<java.lang.String, java.lang.Object>)
+2018-06-11 14:05:34.404  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/{ownerId}/edit],methods=[GET]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.initUpdateOwnerForm(int,org.springframework.ui.Model)
+2018-06-11 14:05:34.405  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/{ownerId}/edit],methods=[POST]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.processUpdateOwnerForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,int)
+2018-06-11 14:05:34.405  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/{ownerId}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.samples.petclinic.owner.OwnerController.showOwner(int)
+2018-06-11 14:05:34.406  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/owners/new],methods=[GET]}" onto public java.lang.String org.springframework.samples.petclinic.owner.OwnerController.initCreationForm(java.util.Map<java.lang.String, java.lang.Object>)
+2018-06-11 14:05:34.411  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-06-11 14:05:34.411  INFO 5034 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-06-11 14:05:34.450  INFO 5034 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-11 14:05:34.451  INFO 5034 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-06-11 14:05:34.658  INFO 5034 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring FrameworkServlet ''
+2018-06-11 14:05:34.659  INFO 5034 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2018-06-11 14:05:34.671  INFO 5034 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 12 ms
+2018-06-11 14:05:34.707  INFO 5034 --- [    Test worker] o.s.s.p.owner.OwnerControllerTests       : Started OwnerControllerTests in 1.196 seconds (JVM running for 10.245)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

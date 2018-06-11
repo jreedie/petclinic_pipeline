@@ -1,1 +1,3 @@
 //rootProject.name = 'hellocucumber'
+include ":spring-petclinic"
+project(":spring-petclinic").projectDir = file("../")

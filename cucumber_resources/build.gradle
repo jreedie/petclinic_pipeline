@@ -1,20 +1,23 @@
 plugins {
-  id 'com.github.johnrengelman.plugin-shadow' version '2.0.3'
+  //id 'com.github.johnrengelman.plugin-shadow' version '2.0.3'
   //id 'java'
   id 'groovy'
   id 'application'
+  id 'maven'
 }
 
 //build stuff
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 def cucumberVersion = "1.2.4"
 
+group = 'com.galatea'
+// artifactId is taken by default, from folder name
+version = '0.1-SNAPSHOT'
+
 repositories {
     mavenCentral()
-    jcenter()
-    maven { url "https://jitpack.io" }
 }
 
 
@@ -43,23 +46,20 @@ task cucumber() {
  mainClassName = "cucumber.api.cli.Main"
 
 
-task testJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-  classifier = 'tests'
-  from sourceSets.test.output
-  //configurations = [project.configurations.cucumberRuntime]
-  
-  //args = ['--plugin', 'pretty', '--glue', 'src/test/groovy', 'src/test/resources']
+
+task testJar(type: Jar) {
+    classifier = 'tests'
+    from sourceSets.test.output
 }
 
-
-//Ensure the cucumber tests are executed as part of the build. Makes for a very pretty output.
-// build.dependsOn cucumber 
-// build.dependsOn testJar
+build.dependsOn testJar
 
 dependencies {
     // Groovy library for groovy building!
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
-    compile 'com.github.spring-projects:spring-petclinic:master-SNAPSHOT'
+    compile 'commons-lang:commons-lang:2.3'
+    testCompile project(":spring-petclinic")
+    //compile 'com.github.spring-projects:spring-petclinic:master-SNAPSHOT'
 
     /*
    In order to work around a really flagrant bug ( http://issues.gradle.org/browse/GRADLE-732 )
@@ -74,8 +74,24 @@ dependencies {
     cucumberRuntime files("${jar.archivePath}")
 
     testCompile 'junit:junit:4.11'
-	testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.12.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.12.0'
     testCompile "info.cukes:cucumber-junit:$cucumberVersion"
     testCompile "info.cukes:cucumber-groovy:$cucumberVersion"
 }
+
+// task testJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+//   classifier = 'tests'
+//   from sourceSets.test.output
+//   //exclude(project(":spring-petclinic"))
+//   //configurations = [project.configurations.cucumberRuntime]
+  
+//   //args = ['--plugin', 'pretty', '--glue', 'src/test/groovy', 'src/test/resources']
+// }
+
+
+//Ensure the cucumber tests are executed as part of the build. Makes for a very pretty output.
+// build.dependsOn cucumber 
+
+
+
 

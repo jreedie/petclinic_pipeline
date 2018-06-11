@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.firefox.FirefoxDriver
 
+import org.springframework.samples.petclinic.model.Person
+
 FirefoxDriver driver;
 
 Before("@browser"){
