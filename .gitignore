@@ -13,6 +13,7 @@ target/*
 !.vscode/extensions.json
 _site/
 
+!/cucumber_resources/build/libs/hellocucumber-test.jar
 
 # for cucumber_resources
 
