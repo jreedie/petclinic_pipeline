@@ -15,7 +15,6 @@ pipeline {
     stage('Test') {
       steps {
         sh 'java -cp hellocucumber-test.jar cuketest.RunCukesTest "--glue" "cucumber_resources/src/test/groovy" "--plugin" "html:target/cucumber" "--plugin" "json:target/cucumber/json" "cucumber_resources/src/test/resources"'
-'
       }
 
       post {
