@@ -19,7 +19,7 @@ pipeline {
 
       post {
         always {
-          cucumber '**/target/*.json'
+          cucumber '**/target/cucumber/json'
         }
       }
     }
