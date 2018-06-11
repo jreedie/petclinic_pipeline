@@ -13,6 +13,8 @@ def cucumberVersion = "1.2.4"
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 
@@ -57,6 +59,7 @@ task testJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
 dependencies {
     // Groovy library for groovy building!
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
+    compile 'com.github.spring-projects:spring-petclinic:master-SNAPSHOT'
 
     /*
    In order to work around a really flagrant bug ( http://issues.gradle.org/browse/GRADLE-732 )

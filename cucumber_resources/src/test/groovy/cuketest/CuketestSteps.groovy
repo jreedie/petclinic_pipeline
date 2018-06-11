@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 FirefoxDriver driver;
 
 Before("@browser"){
-	System.setProperty("webdriver.gecko.driver", "cucumber_resources/src/test/resources/geckodriver");
+	System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
 	driver = new FirefoxDriver();
 }
 
