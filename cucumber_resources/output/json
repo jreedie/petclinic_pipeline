@@ -1,0 +1,80 @@
+[
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "# language: en"
+      }
+    ],
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 4588338356,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CuketestSteps.groovy:13"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "The user goes to the homepage",
+        "description": "",
+        "id": "loads-the-application-homepage;the-user-goes-to-the-homepage",
+        "after": [
+          {
+            "result": {
+              "duration": 1009315699,
+              "status": "passed"
+            },
+            "match": {
+              "location": "CuketestSteps.groovy:30"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1214062712,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "Open Firefox and launch the application",
+            "match": {
+              "location": "CuketestSteps.groovy:19"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 106416099,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "The server responds with the homepage",
+            "match": {
+              "location": "CuketestSteps.groovy:24"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 4,
+            "name": "@important"
+          }
+        ]
+      }
+    ],
+    "name": "Loads the application homepage",
+    "description": "",
+    "id": "loads-the-application-homepage",
+    "keyword": "Feature",
+    "uri": "cuketest/applicationHomepage.feature"
+  }
+]
