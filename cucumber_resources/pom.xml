@@ -20,7 +20,7 @@
         <executions>
           <execution>
             <!-- You can bind this to any phase you like -->
-            <phase>test</phase>
+            <phase>compile</phase>
             <goals>
               <!-- goal must be "invoke" -->
               <goal>invoke</goal>
@@ -30,6 +30,9 @@
       </plugin>
     </plugins>
   </build>
+
+
+
 
 
 </project>

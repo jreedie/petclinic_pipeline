@@ -31,7 +31,7 @@ configurations {
 
 
 task cucumber() {
-    dependsOn assemble
+    dependsOn assemble, build
     doLast {
         javaexec {
             main = "cucumber.api.cli.Main"
