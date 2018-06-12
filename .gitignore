@@ -15,6 +15,7 @@ _site/
 
 !/cucumber_resources/build/libs/hellocucumber-test.jar
 
+/build/
 # for cucumber_resources
 
 /cucumber_resources/bin/
