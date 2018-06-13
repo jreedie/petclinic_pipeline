@@ -12,10 +12,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'ls'
-        sh 'cd cucumber_resources'
-        sh 'ls'
-        sh 'mvn test'
+        sh 'cd cucumber_resources; mvn test'
       }
 
 
