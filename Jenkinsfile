@@ -13,7 +13,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'cd cucumber_resources'
-        sh 'mvn compile'
+        sh 'mvn test'
       }
 
 
