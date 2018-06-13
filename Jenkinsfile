@@ -16,11 +16,7 @@ pipeline {
         sh 'mvn compile'
       }
 
-      post {
-        always {
-          cucumber '**/target/cucumber/json'
-        }
-      }
+
     }
 
   }
