@@ -12,8 +12,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; 
-            mvn compile'
+        sh 'cd cucumber_resources; mvn compile'
       }
 
       post {
