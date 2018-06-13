@@ -54,6 +54,25 @@ task testJar(type: Jar) {
 
 build.dependsOn testJar
 
+task writeNewPom {
+    doLast {
+        pom {
+            project {
+                inceptionYear '2008'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }.writeTo("$projectDir/pom.xml")
+    }
+}
+
+
+
 dependencies {
     // Groovy library for groovy building!
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
