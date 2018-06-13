@@ -12,9 +12,14 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; mvn test'
+        sh 'cd cucumber_resources; mvn compile'
       }
 
+      post {
+        always{
+          cucumber '**/target/*.json'
+        }
+      }
 
     }
 
