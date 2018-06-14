@@ -8,11 +8,13 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
+        sh 'ls target'
+        sh 'printenv'
       }
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; gradle cucumber'
+        sh 'cd cucumber_resources; mvn test'
       }
 
       post {
