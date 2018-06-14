@@ -1,61 +1,60 @@
-target/*
-.settings/*
-.classpath
-.project
-.idea
-*.iml
-/target
-.sts4-cache/
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-_site/
+# target/*
+# .settings/*
+# .classpath
+# .project
+# .idea
+# *.iml
+# /target
+# .sts4-cache/
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+# _site/
 
-!/cucumber_resources/build/libs/hellocucumber-test.jar
+# !/cucumber_resources/build/libs/hellocucumber-test.jar
 
-# for cucumber_resources
+# # for cucumber_resources
 
-/cucumber_resources/bin/
+# /cucumber_resources/bin/
 
-.gradle
-/cucumber_resources/build/*
-/cucumber_resources/target/*
+# .gradle
+# /cucumber_resources/build/*
+# /cucumber_resources/target/*
 
-/build/*
+# /build/*
 
-# Ignore Gradle GUI config
-gradle-app.setting
+# # Ignore Gradle GUI config
+# gradle-app.setting
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+# # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+# !gradle-wrapper.jar
 
-# Cache of project
-.gradletasknamecache
+# # Cache of project
+# .gradletasknamecache
 
+# # java files
+# # Compiled class file
+# *.class
 
-# java files
-# Compiled class file
-*.class
+# # Log file
+# *.log
 
-# Log file
-*.log
+# # BlueJ files
+# *.ctxt
 
-# BlueJ files
-*.ctxt
+# # Mobile Tools for Java (J2ME)
+# .mtj.tmp/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# # Package Files #
+# *.jar
+# *.war
+# *.nar
+# *.ear
+# *.zip
+# *.tar.gz
+# *.rar
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# hs_err_pid*
