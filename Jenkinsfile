@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; gradle cucumber'
+        sh 'cd cucumber_resources; echo $PATH; gradle cucumber'
       }
 
       post {
