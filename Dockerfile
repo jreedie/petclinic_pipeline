@@ -5,3 +5,5 @@ RUN \
     curl -L https://services.gradle.org/distributions/gradle-3.4.1-bin.zip -o gradle-3.4.1-bin.zip && \
     unzip gradle-3.4.1-bin.zip && \
 rm gradle-3.4.1-bin.zip
+
+RUN export PATH=/usr/local/gradle/gradle-3.4.1/bin:$PATH
