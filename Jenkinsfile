@@ -8,12 +8,12 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
+        sh 'ls target'
       }
     }
     stage('Test') {
       steps {
         sh 'cd cucumber_resources; mvn test'
-        sh 'ls target'
       }
 
       post {
