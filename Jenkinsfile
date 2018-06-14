@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; cat pom.xml; mvn test'
+        sh 'cd cucumber_resources; gradle cucumber'
       }
 
       post {
