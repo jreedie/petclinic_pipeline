@@ -8,8 +8,6 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
-        sh 'ls target'
-        sh 'printenv'
       }
     }
     stage('Test') {
