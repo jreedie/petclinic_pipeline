@@ -23,6 +23,8 @@ _site/
 /cucumber_resources/build/*
 /cucumber_resources/target/*
 
+/build/*
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
