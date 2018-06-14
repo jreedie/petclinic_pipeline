@@ -6,4 +6,4 @@ RUN \
     unzip gradle-3.4.1-bin.zip && \
 rm gradle-3.4.1-bin.zip
 
-RUN export PATH=/usr/local/gradle/gradle-3.4.1/bin:$PATH
+ENV PATH=/usr/local/gradle/gradle-3.4.1/bin:$PATH
