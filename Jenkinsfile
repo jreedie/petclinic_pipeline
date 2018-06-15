@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage('Build') {
       steps{
+        sh 'echo "${env.GIT_COMMITER_EMAIL}"'
         sh 'mvn -B -DskipTests clean package'
       }
     }
