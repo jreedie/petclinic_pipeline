@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'cd cucumber_resources; echo $PATH; gradle cucumber'
+        sh 'cd cucumber_resources; gradle cucumber'
       }
 
       post {
@@ -21,7 +21,7 @@ pipeline {
           cucumber '**/target/*.json'
         }
         success {
-          mail to: 'reedie@galatea-associates.com',
+          mail to: '${GIT_COMMITER_EMAIL}',
             subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
             body: "Good job! View results here ${BUILD_URL}"
         }
