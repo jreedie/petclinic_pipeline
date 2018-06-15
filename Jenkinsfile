@@ -14,9 +14,7 @@ pipeline {
   
     stage('Test') {
       steps {
-        dir("petclinic_pipeline/cucumber_resources"){
-          sh 'gradle cucumber'
-        }
+          sh 'cd cucumber_resources; gradle cucumber'
       }
 
       post {
