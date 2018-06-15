@@ -6,8 +6,6 @@ pipeline {
   }
   stages {
     stage('Build') {
-      steps {
-        sh 'echo $PATH'
         sh 'mvn -B -DskipTests clean package'
       }
     }
@@ -21,7 +19,7 @@ pipeline {
           cucumber '**/target/*.json'
         }
         success {
-          mail to: '${GIT_COMMITER_EMAIL}',
+          mail to: "${GIT_COMMITER_EMAIL}",
             subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
             body: "Good job! View results here ${BUILD_URL}"
         }
