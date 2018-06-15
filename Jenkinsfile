@@ -7,8 +7,10 @@ pipeline {
   
   stages {
     stage('SonarQube analysis'){
-      withSonarQubeEnv('SonarQube5.3'){
-        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+      steps{
+        withSonarQubeEnv('SonarQube5.3'){
+          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+        }
       }
     }
 
