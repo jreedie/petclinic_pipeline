@@ -21,13 +21,13 @@ pipeline {
           cucumber '**/target/*.json'
         }
         success {
-          mail to: 'reedie@galatea-associates.com'
-            subject: "Build ${currentBuild.fullDisplayName} passed all tests!"
+          mail to: 'reedie@galatea-associates.com',
+            subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
             body: "Good job! View results here ${BUILD_URL}"
         }
         failure {
-          mail to: 'reedie@galatea-associates.com'
-            subject: "Build ${currentBuild.fullDisplayName} did not pass all tests"
+          mail to: 'reedie@galatea-associates.com',
+            subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
             body: "View results here ${BUILD_URL}"
         }
       }
