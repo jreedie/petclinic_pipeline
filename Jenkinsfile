@@ -20,10 +20,19 @@ pipeline {
       post {
         always{
           cucumber '**/target/*.json'
+        }
+        success{
           emailext(
-            subject: "Build ${currentBuild.fullDisplayName} status: ${BUILD_STATUS}",
-            body: "View full results here: ${BUILD_URL}",
-            recipientProviders: [[$class: 'DevelopersRecipientProver']]
+              subject: "Build ${currentBuild.fullDisplayName} status: ${BUILD_STATUS}",
+              body: "View full results here: ${BUILD_URL}",
+              recipientProviders: [[$class: 'DevelopersRecipientProver']]
+          )
+        }
+        failure{
+          emailext(
+              subject: "Build ${currentBuild.fullDisplayName} status: ${BUILD_STATUS}",
+              body: "View full results here: ${BUILD_URL}",
+              recipientProviders: [[$class: 'DevelopersRecipientProver']]
           )
         }
 
