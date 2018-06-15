@@ -14,7 +14,7 @@ pipeline {
   
     stage('Test') {
       steps {
-        dir("/cucumber_resources"){
+        dir("petclinic_pipeline/cucumber_resources"){
           sh 'gradle cucumber'
         }
       }
