@@ -28,9 +28,9 @@ pipeline {
             subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
             body: "View results here ${BUILD_URL}"
         }
-      }
-
     }
+
+    
 
   }
 }
