@@ -23,7 +23,7 @@ pipeline {
           emailext(
             subject: "Build ${currentBuild.fullDisplayName} status: ${BUILD_STATUS}",
             body: "View full results here: ${BUILD_URL}",
-            recepientProviders: [[$class: 'DevelopersRecipientProver']]
+            recipientProviders: [[$class: 'DevelopersRecipientProver']]
           )
         }
 
