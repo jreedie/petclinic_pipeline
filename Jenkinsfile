@@ -22,22 +22,18 @@ pipeline {
           cucumber '**/target/*.json'
         }
         success{
-          script{ 
-            emailext(
-                subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
-                body: "Good job! View full results here: ${BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProver']]
-            )
-          }
+          emailext(
+              subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
+              body: "Good job! View full results here: ${BUILD_URL}",
+              recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+          )
         }
         failure{
-          script{
-            emailext(
-                subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
-                body: "View full results here: ${BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProver']]
-            )
-          }
+          emailext(
+              subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
+              body: "View full results here: ${BUILD_URL}",
+              recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+          )
         }
 
       }
