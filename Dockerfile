@@ -9,4 +9,3 @@ RUN \
 ENV GRADLE_HOME=/usr/local/gradle-3.4.1
 ENV PATH=$GRADLE_HOME/bin:$PATH
 
-ADD ~/.ssh/id_rsa /home/ssh_test/
