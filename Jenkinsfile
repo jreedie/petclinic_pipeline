@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Library Test'){
     	steps{
-    		ssh 'james@127.0.1.1 mkdir didthiswork'
+    		ssh 'james@10.0.2.15 mkdir didthiswork'
     	}
     }
 
