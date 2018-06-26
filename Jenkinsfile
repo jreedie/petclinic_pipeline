@@ -6,14 +6,6 @@ pipeline {
   }
   
   stages {
-    stage('Library Test'){
-    	steps{
-    		ssh ' -o StrictHostKeyChecking=no james@10.0.2.15  mkdir didthiswork'
-    	}
-    }
-
-
-
     stage('Build') {
       steps{
         sh 'mvn -B -DskipTests clean package'
