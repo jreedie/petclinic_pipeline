@@ -8,7 +8,7 @@ pipeline {
   stages {
   	stage('ssh test'){
   		steps{
-  			ssh 'james@127.0.1.1 ls'
+  			ssh '-o StricHostKeyChecking=no james@10.0.2.15 ls'
   		}
   	}
 
