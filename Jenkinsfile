@@ -6,6 +6,12 @@ pipeline {
   }
   
   stages {
+  	stage('ssh test'){
+  		steps{
+  			sh 'ssh james@10.0.2.15'
+  		}
+  	}
+
     stage('Build') {
       steps{
         sh 'mvn -B -DskipTests clean package'
