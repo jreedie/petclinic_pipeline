@@ -6,9 +6,9 @@ pipeline {
   }
   
   stages {
-  	stage('ssh test'){
+  	stage('docker container ip check'){
   		steps{
-  			ssh '-o StrictHostKeyChecking=no james@10.0.2.15 ls'
+  			sh 'ifconfig'
   		}
   	}
 
