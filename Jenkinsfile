@@ -8,7 +8,7 @@ pipeline {
   stages {
   	stage('docker container ip check'){
   		steps{
-  			sh 'ifconfig'
+  			sh 'ip a'
   		}
   	}
 
