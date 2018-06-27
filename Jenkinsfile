@@ -8,7 +8,7 @@ pipeline {
   stages {
   	stage('ssh test'){
   		steps{
-  			ssh 'james@10.0.2.15 ls'
+  			ssh 'james@127.0.1.1 ls'
   		}
   	}
 
