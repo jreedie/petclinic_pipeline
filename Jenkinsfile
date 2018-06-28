@@ -21,10 +21,9 @@ pipeline {
                     touch output.txt
                     export VAULT_ADDR='http://127.0.0.1:8200'
                     ./vault login ${VAULT_INIT_TOKEN}
-                    export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
-                    ssh '${SECRET_ID}'
-                                      
+                    export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)  
                 '''
+                ssh '${SECRET_ID}'
             }
             
   		}
