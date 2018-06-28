@@ -2,7 +2,7 @@ pipeline {
   agent {
         dockerfile {
         args '''-v /root/.m2:/root/.m2
-                -p 8200:8200
+                -p 8200:8203
       	'''
       }
   }          
@@ -10,7 +10,7 @@ pipeline {
   stages {
   	stage('docker container ip check'){
   		steps{
-  			sh 'curl http://127.0.0.1:8200:/v1/sys/init'
+  			sh 'curl http://127.0.0.1:8203:/v1/sys/init'
   		}
   	}
 
