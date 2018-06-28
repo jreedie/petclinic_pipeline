@@ -22,7 +22,7 @@ pipeline {
                     export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
                     export VAULT_TOKEN=$(./vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID})
                     ./vault login ${VAULT_TOKEN}
-                    echo ./vault kv get -field=test secret/hello                    
+                    ./vault kv get -field=test secret/hello | echo -                    
 
                 '''
             }
