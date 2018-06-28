@@ -8,10 +8,23 @@ pipeline {
   }          
   
   stages {
-  	stage('detect vault server check'){
+  	stage('vault testing'){
   		steps{
-  			sh 'curl http://127.0.0.1:8200/v1/sys/init'
-            sh 'cat /etc/os-release'
+  			withCredentials([
+                string(credentialsId: 'role', variable: 'ROLE_ID'),
+                string(credentialsId:'vault-token', variable: 'VAULT_TOKEN')
+            ]) {
+                sh '''
+                    cd ~/
+                    set +x
+                    export VAULT_ADDR='http://127.0.0.1:8200'
+                    export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
+                    export VAULT_TOKEN=$(./vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID})
+                    vault kv get -field=test secret/hello                    
+
+                '''
+            }
+            
   		}
   	}
 
