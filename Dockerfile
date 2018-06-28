@@ -9,6 +9,15 @@ RUN \
 ENV GRADLE_HOME=/usr/local/gradle-3.4.1
 ENV PATH=$GRADLE_HOME/bin:$PATH
 
+
+RUN \
+	cd ~/ && \
+	curl https://releases.hashicorp.com/vault/0.10.3/vault_0.10.3_linux_amd64.zip -o
+	vault.zip && \
+	unzip vault.zip && \
+	rm vault.zip
+
+
 RUN useradd jenkinsUser
 USER jenkinsUser
 
