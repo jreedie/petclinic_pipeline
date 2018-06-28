@@ -24,6 +24,7 @@ pipeline {
                     export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)  
                 '''
                 ssh '${SECRET_ID}'
+                sh 'cat ~/output.txt'
             }
             
   		}
