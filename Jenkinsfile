@@ -26,7 +26,7 @@ pipeline {
                     echo $SECRET_ID > secret.txt  
                 '''
                 ssh ' '
-                sh 'cat secret.txt'
+                sh 'cat ~/secret.txt'
                 sh 'cat ~/output.txt'
             }
             
