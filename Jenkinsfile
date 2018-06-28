@@ -11,7 +11,7 @@ pipeline {
   	stage('detect vault server check'){
   		steps{
   			sh 'curl http://127.0.0.1:8200/v1/sys/init'
-            sh 'lsb_release -a'
+            sh 'cat /etc/os-release'
   		}
   	}
 
