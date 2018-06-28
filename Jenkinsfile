@@ -16,7 +16,7 @@ pipeline {
             ]) {
                 sh '''
                     cd ~/
-                    set +x
+                    ls
                     export VAULT_ADDR='http://127.0.0.1:8200'
                     vault login ${VAULT_TOKEN}
                     export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
