@@ -10,7 +10,7 @@ pipeline {
   stages {
   	stage('detect vault server check'){
   		steps{
-  			sh 'curl http://127.0.0.1:8200:/v1/sys/init'
+  			sh 'curl http://127.0.0.1:8200/v1/sys/init'
   		}
   	}
 
