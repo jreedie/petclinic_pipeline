@@ -11,3 +11,4 @@ ENV PATH=$GRADLE_HOME/bin:$PATH
 
 RUN useradd jenkinsUser
 USER jenkinsUser
+
