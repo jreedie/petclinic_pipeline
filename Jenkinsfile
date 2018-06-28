@@ -2,7 +2,7 @@ pipeline {
   agent {
         dockerfile {
         args '''-v /root/.m2:/root/.m2
-                -p 8202:8205
+                --network host
       	'''
       }
   }          
@@ -10,7 +10,7 @@ pipeline {
   stages {
   	stage('detect vault server check'){
   		steps{
-  			sh 'curl http://127.0.0.1:8205:/v1/sys/init'
+  			sh 'curl http://127.0.0.1:8200:/v1/sys/init'
   		}
   	}
 
