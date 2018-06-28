@@ -16,13 +16,12 @@ pipeline {
             ]) {
                 sh '''
                     cd ~/
-                    ls
                     export VAULT_ADDR='http://127.0.0.1:8200'
-                    vault login ${VAULT_TOKEN}
+                    ./vault login ${VAULT_TOKEN}
                     export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
                     export TEMP_TOKEN=$(./vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID})
-                    vault login ${TEMP_TOKEN}
-                    vault kv get -field=test secret/hello                    
+                    ./vault login ${TEMP_TOKEN}
+                    ./vault kv get -field=test secret/hello                    
 
                 '''
             }
