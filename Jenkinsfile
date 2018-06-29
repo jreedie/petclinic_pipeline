@@ -15,7 +15,7 @@ pipeline {
                 string(credentialsId: 'role', variable: 'ROLE_ID'),
                 string(credentialsId:'vault-token', variable: 'VAULT_INIT_TOKEN')
             ]) {
-               
+                ssh "${VAULT_INIT_TOKEN}"   
                 sh 'cat ~/output.txt'
             }
             
