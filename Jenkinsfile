@@ -15,18 +15,7 @@ pipeline {
                 string(credentialsId: 'role', variable: 'ROLE_ID'),
                 string(credentialsId:'vault-token', variable: 'VAULT_INIT_TOKEN')
             ]) {
-                sh '''
-                    cd ~/
-
-                    touch output.txt
-                    export VAULT_ADDR='http://127.0.0.1:8200'
-                    ./vault login ${VAULT_INIT_TOKEN}
-                    export SECRET_ID=$(./vault write -field=secret_id -f auth/approle/role/vault-test/secret-id)
-                    touch secret.txt
-                    echo "$SECRET_ID" > secret.txt  
-                '''
-                ssh ' '
-                sh 'cat ~/secret.txt'
+                ssh '${VAULT_INIT_TOKEN}'
                 sh 'cat ~/output.txt'
             }
             
