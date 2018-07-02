@@ -16,7 +16,7 @@ pipeline {
             ]) {
                 ssh "${VAULT_INIT_TOKEN}"   
                 sh 'cat ~/output.txt'
-                sh 'cat ~/tempfile.txt'
+                sh 'cat ~/tempfile.JSON'
                 sh 'rm ~/output.txt'
             }
   		}
