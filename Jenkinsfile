@@ -9,17 +9,10 @@ pipeline {
     }          
   
   stages {
-  	stage('vault testing'){
+  	stage('Sonarqube testing'){
   		steps{
-  			withCredentials([
-                string(credentialsId:'vault-token', variable: 'VAULT_INIT_TOKEN')
-            ]) {
-                ssh "${VAULT_INIT_TOKEN}"   
-                sh 'cat ~/output.txt'
-                sh 'rm ~/output.txt'
-                ssh 'af625cbf-1a54-fc57-19d4-28ee49293e12'
-                sh 'cat ~/output.txt'
-                sh 'rm ~/output.txt'
+  			withSonarQubeEnv('sonar') {
+                sh 'mvn clean package sonar:sonar'
             }
   		}
   	}
