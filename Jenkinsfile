@@ -17,6 +17,14 @@ pipeline {
   		}
   	}
 
+    stage("Quality Gate"){
+        steps{
+            timeout(time: 1, unit: 'HOURS'){
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+
     stage('Build') {
         steps{
             sh 'mvn -B -DskipTests clean package'
