@@ -10,7 +10,7 @@ pipeline {
 
     stage('Build') {
         steps{
-            sh 'echo ${GIT_COMMIT}'
+            sh 'git show --name-only'
             sh 'mvn -B -DskipTests clean package'
         }
     }
