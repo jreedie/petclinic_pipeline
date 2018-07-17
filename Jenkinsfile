@@ -1,29 +1,12 @@
 pipeline {
     agent {
         dockerfile {
-        args '''
-                -v /root/.m2:/root/.m2
-                --network host
-      	'''
+       
         }
     }          
   
   stages {
-  	stage('Sonarqube testing'){
-  		steps{
-  			withSonarQubeEnv('sonar') {
-                sh 'mvn clean package sonar:sonar'
-            }
-  		}
-  	}
-
-    stage("Quality Gate"){
-        steps{
-            timeout(time: 1, unit: 'HOURS'){
-                waitForQualityGate abortPipeline: false
-            }
-        }
-    }
+  	
 
     stage('Build') {
         steps{
