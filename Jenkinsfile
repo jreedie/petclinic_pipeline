@@ -9,7 +9,7 @@ pipeline {
   	
     stage('Build and Sonarqube Analysis'){
         steps{
-            withSonarQubeEnv('sonar-pass'){
+            withSonarQubeEnv('sonar-fail'){
                 sh 'mvn clean package sonar:sonar'
             }
         }
