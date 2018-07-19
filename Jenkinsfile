@@ -49,5 +49,12 @@ pipeline {
 
         }
     }
+
+    stage('Windows test'){
+        agent { label 'windows' }
+        steps{
+            bat 'mvn --version'
+        }
+    }
   }
 }
