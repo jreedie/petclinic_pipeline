@@ -8,7 +8,7 @@ pipeline {
   stages {
   	
     stage('Windows test'){
-        agent { label 'windrows' }
+        agent { label 'windows' }
         steps{
             bat 'mvn --version'
         }
