@@ -7,6 +7,13 @@ pipeline {
   
   stages {
   	
+    stage('Windows test'){
+        agent { label 'windrows' }
+        steps{
+            bat 'mvn --version'
+        }
+    }
+
     stage('Build and Sonarqube Analysis'){
         steps{
             withSonarQubeEnv('sonar-pass'){
@@ -50,11 +57,6 @@ pipeline {
         }
     }
 
-    stage('Windows test'){
-        agent { label 'windows' }
-        steps{
-            bat 'mvn --version'
-        }
-    }
+
   }
 }
