@@ -8,9 +8,9 @@ pipeline {
   stages {
   	
     stage('ACI test'){
-        agent { label 'windows' }
+        agent { label 'linux' }
         steps{
-            bat 'mvn --version'
+            sh 'mvn --version'
         }
     }
 
