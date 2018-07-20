@@ -1,21 +1,15 @@
 pipeline {
-    agent {
-        dockerfile {
-       
-        }
-    }          
+    agent { label 'linux-pod' }          
   
   stages {
   	
     stage('ACI test'){
-        agent { label 'linux-pod' }
         steps{
             sh 'mvn --version'
         }
     }
 
     stage('Build and Sonarqube Analysis'){
-        agent { label 'linux-pod'}
         steps{
             withSonarQubeEnv('sonar-pass'){
                 sh 'mvn clean package sonar:sonar'
@@ -32,7 +26,6 @@ pipeline {
     }
   
     stage('Test') {
-        agent { label 'linux-pod'}
         steps {
             sh 'cd cucumber_resources; gradle cucumber'
         }
