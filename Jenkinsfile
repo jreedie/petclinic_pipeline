@@ -32,8 +32,8 @@ pipeline {
     }
   
     stage('Test') {
+        agent { label 'linux-pod'}
         steps {
-            agent { label 'linux-pod'}
             sh 'cd cucumber_resources; gradle cucumber'
         }
 
