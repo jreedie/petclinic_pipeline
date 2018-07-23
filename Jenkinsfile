@@ -3,7 +3,7 @@ pipeline {
   
   stages {
   	
-    stage('Build & Push Docker Image) {
+    stage('Build & Push Docker Image') {
         steps{
             sh 'docker build -t jreedie/cloudbees-jnlp-slave-with-gradle:latest .'
             withDockerRegistry([credentialsId: "${linux-slave}", url: ""]) {
