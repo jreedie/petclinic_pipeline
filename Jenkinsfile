@@ -6,7 +6,7 @@ pipeline {
     stage('Build & Push Docker Image') {
         steps{
             sh 'docker build -f "Dockerfile-jnlp" -t jreedie/cloudbees-jnlp-slave-with-gradle:latest .'
-            withDockerRegistry([credentialsId: "${linux-slave}", url: ""]) {
+            withDockerRegistry([credentialsId: "linux-slave", url: ""]) {
                 sh 'docker push jreedie/cloudbees-jnlp-slave-with-gradle:latest'
             }
             
