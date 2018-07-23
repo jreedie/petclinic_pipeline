@@ -1,16 +1,20 @@
 pipeline {
-    agent { label 'linux-pod' }          
+    agent { label 'master' }          
   
   stages {
   	
-    stage('Windows test'){
-        agent { label 'windows-pod'}
+    stage('Build & Push Docker Image) {
         steps{
-            bat 'mvn --version'
+            sh 'docker build -t jreedie/cloudbees-jnlp-slave-with-gradle:latest .'
+            withDockerRegistry([credentialsId: "${linux-slave}", url: ""]) {
+                sh 'docker push jreedie/cloudbees-jnlp-slave-with-gradle:latest'
+            }
+            
         }
     }
 
     stage('Build and Sonarqube Analysis'){
+        agent{ label 'linux-pod' }
         steps{
             withSonarQubeEnv('sonar-pass'){
                 sh 'mvn clean package sonar:sonar'
@@ -19,6 +23,7 @@ pipeline {
     }
 
     stage('Quality Gate') {
+        agent { label 'linux-pod' }
         steps{
             timeout(time: 1, unit: 'HOURS'){
                 waitForQualityGate abortPipeline: true
@@ -27,6 +32,7 @@ pipeline {
     }
   
     stage('Test') {
+        agent {label 'linux-pod' }
         steps {
             sh 'cd cucumber_resources; gradle cucumber'
         }
