@@ -5,9 +5,13 @@ pipeline {
   	
         stage('Deploy Cluster') {
             steps{
-                sh 'terraform init'
-                sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
-                sh 'ls _ouptut'
+                withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
+                string(credentialsId: 'tenant_id', variable: 'tenantID')]){
+                    sh "az login --service-principal -u $clientID -p $clientSecret --tenant $tenantID"
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
+                    sh 'ls _ouptut'
+                }
             }
         }
 
