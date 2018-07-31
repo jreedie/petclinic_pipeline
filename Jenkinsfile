@@ -5,6 +5,7 @@ pipeline {
   	
         stage('Deploy Cluster') {
             steps{
+                sh 'terraform init'
                 sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
                 sh 'ls _ouptut'
             }
