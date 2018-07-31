@@ -1,52 +1,64 @@
 pipeline {
-  agent {
-      dockerfile {
-      args '-v /root/.m2:/root/.m2'
-      }
-  }
+    agent { label 'master' }          
   
   stages {
-    stage('SonarQube analysis'){
-      steps{
-        withSonarQubeEnv('sonar'){
-          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+    
+    stage('Build & Push Docker Image') {
+        steps{
+            sh 'docker build -f "Dockerfile-jnlp" -t jreedie/cloudbees-jnlp-slave-with-gradle:latest .'
+            withDockerRegistry([credentialsId: "linux-slave", url: ""]) {
+                sh 'docker push jreedie/cloudbees-jnlp-slave-with-gradle:latest'
+            }
+            
         }
-      }
     }
 
+    stage('Build and Sonarqube Analysis'){
+        agent{ label 'linux-pod' }
+        steps{
+            withSonarQubeEnv('sonar-pass'){
+                sh 'mvn clean package sonar:sonar'
+            }
+        }
+    }
 
-
-    stage('Build') {
-      steps{
-        sh 'mvn -B -DskipTests clean package'
-      }
+    stage('Quality Gate') {
+        agent { label 'linux-pod' }
+        steps{
+            timeout(time: 1, unit: 'HOURS'){
+                waitForQualityGate abortPipeline: true
+            }
+        }
     }
   
     stage('Test') {
-      steps {
-          sh 'cd cucumber_resources; gradle cucumber'
-      }
-
-      post {
-        always{
-          cucumber '**/target/*.json'
-        }
-        success{
-          emailext(
-              subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
-              body: "Good job! View full results here: ${BUILD_URL}",
-              recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-          )
-        }
-        failure{
-          emailext(
-              subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
-              body: "View full results here: ${BUILD_URL}",
-              recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-          )
+        agent {label 'linux-pod' }
+        steps {
+            sh 'cd cucumber_resources; gradle cucumber'
         }
 
-      }
+        post {
+            always{
+                cucumber '**/target/*.json'
+            }
+            success{
+                emailext(
+                    subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
+                    body: "Good job! View full results here: ${BUILD_URL}",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                )
+            }
+            failure{
+                emailext(
+                    subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
+                    body: "View full results here: ${BUILD_URL}",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                )
+            }
+
+        }
     }
+
+
   }
 }

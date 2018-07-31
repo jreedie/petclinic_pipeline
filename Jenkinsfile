@@ -1,64 +1,58 @@
 pipeline {
-    agent { label 'master' }          
+    agent { dockerfile }          
   
-  stages {
+    stages {
   	
-    stage('Build & Push Docker Image') {
-        steps{
-            sh 'docker build -f "Dockerfile-jnlp" -t jreedie/cloudbees-jnlp-slave-with-gradle:latest .'
-            withDockerRegistry([credentialsId: "linux-slave", url: ""]) {
-                sh 'docker push jreedie/cloudbees-jnlp-slave-with-gradle:latest'
+        stage('Deploy Cluster') {
+            steps{
+                sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
+                sh 'ls _ouptut'
             }
-            
         }
+
+        stage('Build and Sonarqube Analysis'){
+            steps{
+                withSonarQubeEnv('sonar-pass'){
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps{
+                timeout(time: 1, unit: 'HOURS'){
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+      
+        stage('Test') {
+            steps {
+                sh 'cd cucumber_resources; gradle cucumber'
+            }
+
+            post {
+                always{
+                    cucumber '**/target/*.json'
+                }
+                success{
+                    emailext(
+                        subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
+                        body: "Good job! View full results here: ${BUILD_URL}",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+                failure{
+                    emailext(
+                        subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
+                        body: "View full results here: ${BUILD_URL}",
+                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                    )
+                }
+
+            }
+        }
+
+
     }
-
-    stage('Build and Sonarqube Analysis'){
-        agent{ label 'linux-pod' }
-        steps{
-            withSonarQubeEnv('sonar-pass'){
-                sh 'mvn clean package sonar:sonar'
-            }
-        }
-    }
-
-    stage('Quality Gate') {
-        agent { label 'linux-pod' }
-        steps{
-            timeout(time: 1, unit: 'HOURS'){
-                waitForQualityGate abortPipeline: true
-            }
-        }
-    }
-  
-    stage('Test') {
-        agent {label 'linux-pod' }
-        steps {
-            sh 'cd cucumber_resources; gradle cucumber'
-        }
-
-        post {
-            always{
-                cucumber '**/target/*.json'
-            }
-            success{
-                emailext(
-                    subject: "Build ${currentBuild.fullDisplayName} passed all tests!",
-                    body: "Good job! View full results here: ${BUILD_URL}",
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-                )
-            }
-            failure{
-                emailext(
-                    subject: "Build ${currentBuild.fullDisplayName} did not pass all tests",
-                    body: "View full results here: ${BUILD_URL}",
-                    recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-                )
-            }
-
-        }
-    }
-
-
-  }
 }
