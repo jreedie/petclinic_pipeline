@@ -1,27 +1,20 @@
 pipeline {
-    agent { label 'master' }
+    agent { dockerfile true }
   
     stages {
   	
         stage('Deploy Cluster') {
-            agent{
-                dockerfile{
-                    filename 'Dockerfile-terra'
-                }
-            }
             steps{
                 withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
                 string(credentialsId: 'tenant_id', variable: 'tenantID')]){
-                    sh "az login --service-principal -u $clientID -p $clientSecret --tenant $tenantID"
                     sh 'terraform init'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
-                    sh 'ls _ouptut'
                 }
+                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ./$(find _output -name \'azuredeploy.json\') --parameters @./$(find _output -name \'azuredeploy.parameters.json\')']], principalCredentialId: 'kubegroup_sp'
             }
         }
 
         stage('Build and Sonarqube Analysis'){
-            agent { dockerfile true }  
             steps{
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
@@ -29,8 +22,7 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
-            agent { dockerfile true }  
+        stage('Quality Gate') {  
             steps{
                 timeout(time: 1, unit: 'HOURS'){
                     waitForQualityGate abortPipeline: true
@@ -39,7 +31,6 @@ pipeline {
         }
       
         stage('Test') {
-            agent { dockerfile true }  
             steps {
                 sh 'cd cucumber_resources; gradle cucumber'
             }

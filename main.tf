@@ -48,13 +48,4 @@ resource "null_resource" "run_acs_engine" {
   depends_on = ["null_resource.render_acs_engine_config"]
 }
 
-# Locally, run the Azure 2.0 CLI to create the resource deployment
-resource "null_resource" "deploy_acs" {
-  provisioner "local-exec" {
-    command = "az group deployment create --name ${var.cluster_name} --resource-group ${var.resource_group_name} --template-file ./$(find _output -name 'azuredeploy.json') --parameters @./$(find _output -name 'azuredeploy.parameters.json')"
-  }
-
-  depends_on = ["null_resource.run_acs_engine"]
-}
-
 
