@@ -8,6 +8,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
                 string(credentialsId: 'tenant_id', variable: 'tenantID')]){
                     sh 'terraform init'
+                    sh 'terraform plan -var-file=k8s.tfvars'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
                 }
                 azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ./$(find _output -name \'azuredeploy.json\') --parameters @./$(find _output -name \'azuredeploy.parameters.json\')']], principalCredentialId: 'kubegroup_sp'
