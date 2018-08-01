@@ -4,6 +4,11 @@ pipeline {
     stages {
   	
         stage('Deploy Cluster') {
+            agent{
+                dockerfile{
+                    filename 'Dockerfile-terra'
+                }
+            }
             steps{
                 withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
                 string(credentialsId: 'tenant_id', variable: 'tenantID')]){
