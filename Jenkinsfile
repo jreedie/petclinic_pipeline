@@ -1,8 +1,5 @@
 pipeline {
     agent { dockerfile true }
-    environment{
-        WORKSPACE="/var/lib/jenkins/workspace/pipeline_demo_master-YCLVMIFKQWOHG4NMQXMJVJZU3W6QMPWGKPDBHFPXCCLCPYAAV4UQ/"
-    }
     stages {
   	
         stage('Deploy Cluster') {
@@ -11,10 +8,10 @@ pipeline {
                 string(credentialsId: 'tenant_id', variable: 'tenantID')]){
                     sh 'terraform state rm ""'
                     sh 'terraform init'
-                    sh 'terraform plan -var-file=k8s.tfvars'
+                    sh 'echo ${env.WORKSPACE}'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
                 }
-                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ${WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.json --parameters ${WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
+                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ${env.WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.json --parameters ${env.WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
             }
         }
 
