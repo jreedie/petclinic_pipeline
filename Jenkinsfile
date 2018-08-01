@@ -7,6 +7,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
                 string(credentialsId: 'tenant_id', variable: 'tenantID')]){
+                    sh 'terraform state rm ""'
                     sh 'terraform init'
                     sh 'terraform plan -var-file=k8s.tfvars'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
