@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true }          
+         
   
     stages {
   	
@@ -21,6 +21,7 @@ pipeline {
         }
 
         stage('Build and Sonarqube Analysis'){
+            agent { dockerfile true }  
             steps{
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
@@ -29,6 +30,7 @@ pipeline {
         }
 
         stage('Quality Gate') {
+            agent { dockerfile true }  
             steps{
                 timeout(time: 1, unit: 'HOURS'){
                     waitForQualityGate abortPipeline: true
@@ -37,6 +39,7 @@ pipeline {
         }
       
         stage('Test') {
+            agent { dockerfile true }  
             steps {
                 sh 'cd cucumber_resources; gradle cucumber'
             }
