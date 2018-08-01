@@ -1,5 +1,7 @@
 FROM maven:3.5.2-jdk-8
 
+
+
 RUN apt-get update && apt-get install -y lsb-release
 
 RUN \
@@ -35,15 +37,14 @@ RUN \
 
 ENV PATH=/usr/local/acs-engine-v0.20.2-linux-amd64:$PATH
 
-
 RUN \
-	AZ_REPO=$(lsb_release -cs) && \
-	echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
-    tee /etc/apt/sources.list.d/azure-cli.list && \
-    curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    apt-get install apt-transport-https && \
-    apt-get update && apt-get install azure-cli
- 
+   	AZ_REPO=$(lsb_release -cs) && \
+   	echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+   	tee /etc/apt/sources.list.d/azure-cli.list && \
+   	curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+   	apt-get install apt-transport-https && \
+   	apt-get update && apt-get install azure-cli
+
 RUN \
 	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
 	chmod +x ./kubectl && \
