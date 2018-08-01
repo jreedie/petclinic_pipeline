@@ -11,12 +11,8 @@ pipeline {
                     sh 'terraform init'
                     sh 'terraform plan -var-file=k8s.tfvars'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
-                    sh 'ls _output'
-                    sh 'realpath _output'
-                    sh 'ls _output/kubegroup-k8s-cluster'
-
                 }
-                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file _output/kubegroup-k8s-cluster/azuredeploy.json --parameters _output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
+                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ${WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.json --parameters ${WORKSPACE}_output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
             }
         }
 
