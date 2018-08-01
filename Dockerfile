@@ -51,6 +51,3 @@ RUN \
 	mv ./kubectl /usr/local/bin/kubectl
 
 
-RUN useradd jenkinsUser
-USER jenkinsUser
-
