@@ -12,6 +12,7 @@ pipeline {
                     sh 'terraform plan -var-file=k8s.tfvars'
                     sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
                     sh 'ls _output'
+                    sh 'realpath _output'
                     sh 'ls _output/kubegroup-k8s-cluster'
 
                 }
