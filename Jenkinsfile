@@ -15,7 +15,7 @@ pipeline {
                     sh 'ls _output/kubegroup-k8s-cluster'
 
                 }
-                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file ./$(find _output -name \'azuredeploy.json\') --parameters @./$(find _output -name \'azuredeploy.parameters.json\')']], principalCredentialId: 'kubegroup_sp'
+                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file _output/kubegroup-k8s-cluster/azuredeploy.json --parameters _output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
             }
         }
 
