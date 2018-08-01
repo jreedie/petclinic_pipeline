@@ -1,7 +1,7 @@
 pipeline {
     agent { dockerfile true }
     environment{
-        WORKSPACE=/var/lib/jenkins/workspace/pipeline_demo_master-YCLVMIFKQWOHG4NMQXMJVJZU3W6QMPWGKPDBHFPXCCLCPYAAV4UQ/
+        WORKSPACE="/var/lib/jenkins/workspace/pipeline_demo_master-YCLVMIFKQWOHG4NMQXMJVJZU3W6QMPWGKPDBHFPXCCLCPYAAV4UQ/"
     }
     stages {
   	
