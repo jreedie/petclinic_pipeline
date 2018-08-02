@@ -4,14 +4,9 @@ pipeline {
   	
         stage('Deploy Cluster') {
             steps{
-                withCredentials([string(credentialsId: 'client_id', variable: 'clientID'), string(credentialsId: 'client_secret', variable: 'clientSecret'), 
-                string(credentialsId: 'tenant_id', variable: 'tenantID')]){
-                    sh 'terraform state rm ""'
-                    sh 'terraform init'
-                    sh "echo ${env.WORKSPACE}"
-                    sh 'terraform apply -auto-approve -var-file=k8s.tfvars'
+                withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
+                    injectCreds '$vaultToken'
                 }
-                azureCLI commands: [[exportVariablesString: '', script: 'az group deployment create --name k8s-cluster --resource-group kubegroup --template-file var/lib/jenkins/workspace/pipeline_demo_master-YCLVMIFKQWOHG4NMQXMJVJZU3W6QMPWGKPDBHFPXCCLCPYAAV4UQ/_output/kubegroup-k8s-cluster/azuredeploy.json --parameters var/lib/jenkins/workspace/pipeline_demo_master-YCLVMIFKQWOHG4NMQXMJVJZU3W6QMPWGKPDBHFPXCCLCPYAAV4UQ/_output/kubegroup-k8s-cluster/azuredeploy.parameters.json']], principalCredentialId: 'kubegroup_sp'
             }
         }
 

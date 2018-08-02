@@ -15,10 +15,13 @@ ENV PATH=$GRADLE_HOME/bin:$PATH
 
 
 RUN \
-	cd /usr/local && \
+	mkdir /usr/local/vault && \
+	cd /usr/local/vault && \
 	curl https://releases.hashicorp.com/vault/0.10.3/vault_0.10.3_linux_amd64.zip -o vault.zip && \
 	unzip vault.zip && \
 	rm vault.zip
+
+ENV PATH=$PATH:/usr/local/vault
 
 RUN \ 
 	mkdir /usr/local/terraform && \
