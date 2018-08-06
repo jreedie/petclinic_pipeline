@@ -11,7 +11,7 @@ pipeline {
         stage('Deploy Cluster') {
             steps{
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
-                    sh 'vault status'
+                    sh 'export VAULT_ADDR=http://127.0.0.1:8200; vault status'
                     injectCreds '$vaultToken'
                 }
             }
