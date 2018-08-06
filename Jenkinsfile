@@ -12,6 +12,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
                     injectCreds '$vaultToken'
+                    
                 }
             }
         }
