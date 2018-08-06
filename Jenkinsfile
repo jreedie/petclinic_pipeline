@@ -11,6 +11,7 @@ pipeline {
         stage('Deploy Cluster') {
             steps{
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
+                    sh 'vault status'
                     injectCreds '$vaultToken'
                 }
             }
