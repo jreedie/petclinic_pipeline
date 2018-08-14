@@ -5,7 +5,7 @@ FROM maven:3.5.2-jdk-8
 RUN apt-get update && apt-get install -y lsb-release
 
 RUN apt-get update && \
-	apt-get install \
+	apt-get -y install  \
 	    apt-transport-https \
 	    ca-certificates \
 	    curl \
@@ -17,7 +17,7 @@ RUN apt-get update && \
 	   $(lsb_release -cs) \
 	   stable" && \
 	apt-get update && \
-	apt-get install docker-ce
+	apt-get -y install docker-ce
 
 
 
