@@ -29,7 +29,7 @@ pipeline {
             agent { label 'master' }
             steps{ 
                 sh 'echo test'
-                }
+                
             }
         }
       
