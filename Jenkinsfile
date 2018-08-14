@@ -28,7 +28,7 @@ pipeline {
         stage('Build image') {
             steps{ 
                 sh 'docker build -t jreedie/clinic_image:latest -f Dockerfile-app .'
-                withDockerRegistry([credentialsId: "${docker_login}"], url ""]) {
+                withDockerRegistry([credentialsId: "${docker_login}"], url: ""]) {
                     sh 'docker push jreedie/clinic_image:latest'
                 }
             }
