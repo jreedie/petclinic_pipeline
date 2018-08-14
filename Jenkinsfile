@@ -26,6 +26,7 @@ pipeline {
         }
 
         stage('Build image') {
+            agent { label 'master' }
             steps{ 
                 sh 'docker build -t jreedie/clinic_image:latest -f Dockerfile-app .'
                 withDockerRegistry([credentialsId: "${docker_login}", url: ""]) {
