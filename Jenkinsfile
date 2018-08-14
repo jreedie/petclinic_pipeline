@@ -12,6 +12,7 @@ pipeline {
         
         stage('Build and Sonarqube Analysis'){
             steps{
+                sh 'docker info'
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
                 }
