@@ -10,6 +10,15 @@ variable "azure_client_secret" {
   description = "Azure Client Secret"
 }
 
+variable "image" {
+  description = "Docker registry image path"
+  default = "jreedie/clinic_image:latest"
+}
+
+variable "expose_port" {
+  description = "Exposed port for Kubernetes service"
+}
+
 variable "azure_tenant_id" {
   description = "Azure Tenant ID"
 }
@@ -21,31 +30,16 @@ variable "azure_location" {
 
 variable "resource_group_name" {
   description = "Azure Resource Group Name"
-  default = "kubegroup"
+  default = "petclinic"
 }
 
-variable "acs_engine_config_file" {
-  description = "File name and location of the ACS Engine config file"
-  default = "k8s.json"
-}
 
-variable "acs_engine_config_file_rendered" {
-  description = "File name and location of the ACS Engine config file"
-  default = "k8s_rendered.json"
-}
 
-variable "orchestrator_version" {
-  description = "Version of Kubernetes to use"
-  default = "1.10"
-}
 
-variable "master_vm_count" {
-  description = "Number of master VMs to create"
-  default = 1
-}
 
 variable "dns_prefix" {
   description = "DNS prefix for the cluster"
+  default = "k8s-cluster"
 }
 
 variable "vm_size" {

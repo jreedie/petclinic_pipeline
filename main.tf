@@ -1,51 +1,123 @@
 provider "azurerm" {
-	subscription_id = "${var.azure_subscription_id}"
-	client_id 		= "${var.azure_client_id}"	
-	client_secret 	= "${var.azure_client_secret}"
-	tenant_id 		= "${var.azure_tenant_id}"
+  subscription_id = "${var.azure_subscription_id}"
+  client_id     = "${var.azure_client_id}"  
+  client_secret   = "${var.azure_client_secret}"
+  tenant_id     = "${var.azure_tenant_id}"
 }
 
-resource "azurerm_resource_group" "default" {
-	name   	 = "${var.resource_group_name}"
-	location = "${var.azure_location}"
+provider "kubernetes" {
+  host = "${azurerm_kubernetes_cluster.test.kube_config.0.host}"
+  client_certificate = "${base64decode(azurerm_kubernetes_cluster.test.kube_config.0.client_certificate)}"
+  client_key = "${base64decode(azurerm_kubernetes_cluster.test.kube_config.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(azurerm_kubernetes_cluster.test.kube_config.0.cluster_ca_certificate)}"
+
+
 }
 
+resource "azurerm_resource_group" "test" {
+  name     = "${var.resource_group_name}"
+  location = "${var.azure_location}"
+}
 
-# ACS Engine Config
-data "template_file" "acs_engine_config" {
-  template = "${file(var.acs_engine_config_file)}"
+resource "azurerm_kubernetes_cluster" "test" {
+  name                = "${var.cluster_name}"
+  location            = "${var.azure_location}"
+  resource_group_name = "${var.resource_group_name}"
+  dns_prefix          = "${var.dns_prefix}"
 
-  vars {
-    master_vm_count = "${var.master_vm_count}"
-    dns_prefix = "${var.dns_prefix}"
-    vm_size = "${var.vm_size}"
-    worker_vm_count = "${var.worker_vm_count}"
-    admin_user = "${var.admin_user}"
-    ssh_key = "${var.ssh_key}"
-    orchestrator_version = "${var.orchestrator_version}"
-    service_principle_client_id = "${var.azure_client_id}"
-    service_principle_client_secret = "${var.azure_client_secret}"
+  linux_profile {
+    admin_username = "${var.admin_user}"
+
+    ssh_key {
+      key_data = "${var.ssh_key}"
+    }
   }
 
-  depends_on = ["azurerm_resource_group.default"]
-}
-
-# Locally, output the rendered ACS Engine Config (after substitution has been performed)
-resource "null_resource" "render_acs_engine_config" {
-  provisioner "local-exec" {
-    command = "echo '${data.template_file.acs_engine_config.rendered}' > ${var.acs_engine_config_file_rendered}"
+  agent_pool_profile {
+    name            = "default"
+    count           = "${var.worker_vm_count}"
+    vm_size         = "${var.vm_size}"
+    os_type         = "Linux"
+    os_disk_size_gb = 30
   }
 
-  depends_on = ["data.template_file.acs_engine_config"]
-}
-
-# Locally, run the ACS Engine to produce the Azure Resource Template for the K8s cluster
-resource "null_resource" "run_acs_engine" {
-  provisioner "local-exec" {
-    command = "acs-engine generate ${var.acs_engine_config_file_rendered}"
+  service_principal {
+    client_id     = "${var.azure_client_id}"
+    client_secret = "${var.azure_client_secret}"
   }
 
-  depends_on = ["null_resource.render_acs_engine_config"]
+  tags {
+    Environment = "Development"
+  }
+}
+
+resource "kubernetes_replication_controller" "default" {
+   metadata {
+    name = "rep-controller"
+    labels {
+      app = "MyExampleApp"
+    }
+  }
+
+  spec {
+    replicas = 2
+    selector {
+      app = "MyExampleApp"
+    }
+    template {
+      container {
+        image = "${var.image}"
+        name  = "example"
+
+     
+      }
+    }
+  }
+
+  depends_on = ["azurerm_kubernetes_cluster.test"]
+}
+
+resource "kubernetes_service" "default" {
+  metadata {
+    name = "clinic"
+  }
+  spec{
+    selector {
+      app = "MyExampleApp"
+    }
+    session_affinity = "ClientIP"
+    port {
+      port = "${var.expose_port}"
+    }
+    
+    type = "LoadBalancer"
+  }
 }
 
 
+output "id" {
+    value = "${azurerm_kubernetes_cluster.test.id}"
+}
+
+output "kube_config" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config_raw}"
+}
+
+output "client_key" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_key}"
+  sensitive = true
+}
+
+output "client_certificate" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_certificate}"
+  sensitive = true
+}
+
+output "cluster_ca_certificate" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config.0.cluster_ca_certificate}"
+  sensitive = true
+}
+
+output "host" {
+  value = "${azurerm_kubernetes_cluster.test.kube_config.0.host}"
+}

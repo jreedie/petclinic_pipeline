@@ -8,15 +8,7 @@ pipeline {
     }
     stages {
   	
-        stage('Deploy Cluster') {
-            steps{
-                withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
-                    injectCreds '$vaultToken'
-                    
-                }
-            }
-        }
-
+        
         stage('Build and Sonarqube Analysis'){
             steps{
                 withSonarQubeEnv('sonar-pass'){
@@ -32,7 +24,26 @@ pipeline {
                 }
             }
         }
+
+        stage('Build image') {
+            steps{ 
+                sh 'docker build -t jreedie/clinic_image:latest -f Dockerfile-app .'
+                withDockerRegistry([credentialsId: "${docker_login}"], url ""]) {
+                    sh 'docker push jreedie/clinic_image:latest'
+                }
+            }
+        }
       
+        stage('Deploy Cluster') {
+            steps{
+                withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
+                    injectCreds '$vaultToken'
+                    
+                }
+            }
+        }
+
+
         stage('Test') {
             steps {
                 sh 'cd cucumber_resources; gradle cucumber'
@@ -59,6 +70,8 @@ pipeline {
 
             }
         }
+
+
 
 
     }
