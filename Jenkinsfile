@@ -3,6 +3,7 @@ pipeline {
         dockerfile{
             args '''
                 --network host
+                -v /var/run/docker.sock:/var/run/docker.sock
             '''
         }
     }
@@ -26,9 +27,14 @@ pipeline {
         }
 
         stage('Build image') {
-            agent { label 'master' }
             steps{ 
-                sh 'echo test'
+                script{
+                    docker.withRegistry('https://hub.docker.com', 'docker_login'){
+                        def customImage = docker.build("jreedie/clinic_image:latest", "-f Dockerfile-app")
+                        customImage.push()
+                    }
+                }
+                
                 
             }
         }
