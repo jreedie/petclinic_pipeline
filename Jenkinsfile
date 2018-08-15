@@ -12,8 +12,6 @@ pipeline {
         
         stage('Build and Sonarqube Analysis'){
             steps{
-                sh 'id $user'
-                sh 'docker info'
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
                 }
@@ -31,7 +29,7 @@ pipeline {
         stage('Build image') {
             steps{ 
                 script{
-                    docker.withRegistry('https://hub.docker.com', 'docker_login'){
+                    docker.withRegistry('', 'docker_login'){
                         def customImage = docker.build("jreedie/clinic_image:latest", "-f Dockerfile-app")
                         customImage.push()
                     }
