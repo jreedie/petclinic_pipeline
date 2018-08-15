@@ -20,7 +20,7 @@ RUN apt-get update && \
 	apt-get -y install docker-ce
 
 RUN useradd jenkins
-RUN usermod -aG docker jenkins
+RUN usermod -aG docker user
 
 RUN \
     cd /usr/local && \

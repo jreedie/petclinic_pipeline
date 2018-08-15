@@ -12,7 +12,7 @@ pipeline {
         
         stage('Build and Sonarqube Analysis'){
             steps{
-                sh 'id 113'
+                sh 'id $user'
                 sh 'docker info'
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
