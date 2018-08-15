@@ -30,7 +30,7 @@ pipeline {
             steps{ 
                 script{
                     docker.withRegistry('', 'docker_login'){
-                        def customImage = docker.build("jreedie/clinic_image:latest", "-f Dockerfile-app")
+                        def customImage = docker.build("jreedie/clinic_image:latest", "-f Dockerfile-app .")
                         customImage.push()
                     }
                 }

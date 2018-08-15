@@ -19,9 +19,6 @@ RUN apt-get update && \
 	apt-get update && \
 	apt-get -y install docker-ce
 
-RUN useradd jenkins
-RUN usermod -aG docker jenkins
-
 RUN \
     cd /usr/local && \
     curl -L https://services.gradle.org/distributions/gradle-3.4.1-bin.zip -o gradle-3.4.1-bin.zip && \
@@ -62,5 +59,3 @@ RUN \
 	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
 	chmod +x ./kubectl && \
 	mv ./kubectl /usr/local/bin/kubectl
-
-USER jenkins
