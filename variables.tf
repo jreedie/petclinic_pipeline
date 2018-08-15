@@ -17,6 +17,7 @@ variable "image" {
 
 variable "expose_port" {
   description = "Exposed port for Kubernetes service"
+  default = 8090
 }
 
 variable "azure_tenant_id" {
