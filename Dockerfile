@@ -63,4 +63,4 @@ RUN \
 	chmod +x ./kubectl && \
 	mv ./kubectl /usr/local/bin/kubectl
 
-
+USER jenkins
