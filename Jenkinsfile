@@ -12,6 +12,8 @@ pipeline {
         
         stage('Build and Sonarqube Analysis'){
             steps{
+                sh 'whoami'
+                sh 'groups'
                 sh 'docker info'
                 withSonarQubeEnv('sonar-pass'){
                     sh 'mvn clean package sonar:sonar'
