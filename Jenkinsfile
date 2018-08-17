@@ -47,6 +47,7 @@ pipeline {
             agent{ label 'windows-agent' }
             steps{
                 bat 'mvn clean package'
+                bat 'dir'
                     
                 }
             }
