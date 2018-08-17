@@ -18,6 +18,8 @@ pipeline {
             }
         }
 
+
+
         stage('Quality Gate') {  
             steps{
                 timeout(time: 1, unit: 'HOURS'){
@@ -39,10 +41,12 @@ pipeline {
             }
         }
       
-        stage('Deploy Cluster') {
+        
+
+        stage('Build on Windows') {
+            agent{ label 'windows-agent' }
             steps{
-                withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]){
-                    injectCreds '$vaultToken'
+                bat 'mvn clean package'
                     
                 }
             }
