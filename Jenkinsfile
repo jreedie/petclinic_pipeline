@@ -49,7 +49,6 @@ pipeline {
                 bat 'mvn clean package'
                 bat 'dir'
                     
-                }
             }
         }
 
