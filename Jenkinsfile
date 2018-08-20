@@ -43,7 +43,6 @@ pipeline {
       
         stage('Deploy Kubernetes'){
             steps{
-                sh 'terraform state rm ""'
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]) {
                     deployK8s '$vaultToken'
                 }
