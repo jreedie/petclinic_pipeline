@@ -43,11 +43,12 @@ pipeline {
       
         stage('Deploy Kubernetes'){
             steps{
+                sh "terraform destroy -auto-approve -var-file=k8s.tfvars -target=azurerm_kuberenetes_cluster.test -target=azurerm_kubernetes_replication_controller.default -target kubernetes_service.default"
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]) {
                     deployK8s '$vaultToken'
                 }
-                sh "terraform output kube_config > ~/.kube/config"
-                sh "kubectl get services"
+                sh "terraform output kube_config > kube_config"
+                sh "export KUBECONFIG=$(realpath kube_config); kubectl get services"
             }
 
         }
