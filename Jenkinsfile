@@ -56,8 +56,8 @@ pipeline {
         stage('Build on Windows') {
             agent{ label 'windows-agent' }
             steps{
-                bat 'dir'
-                bat 'mvn clean package'
+                powershell 'dir'
+                powershell 'mvn clean package'
                 
                     
             }
