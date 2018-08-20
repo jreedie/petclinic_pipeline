@@ -46,6 +46,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]) {
                     deployK8s '$vaultToken'
                 }
+                sh "terraform output kube_config > ~/.kube/config"
+                sh "kubectl get services"
             }
 
         }
