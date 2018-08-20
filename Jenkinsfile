@@ -48,7 +48,7 @@ pipeline {
                     deployK8s '$vaultToken'
                 }
                 sh "terraform output kube_config > kube_config"
-                sh "export KUBECONFIG=$(realpath kube_config); kubectl get services"
+                sh "export KUBECONFIG=\$(realpath kube_config); kubectl get services"
             }
 
         }
