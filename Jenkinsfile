@@ -41,13 +41,20 @@ pipeline {
             }
         }
       
+        stage('Deploy Kubernetes'){
+            steps{
+                withCredentials([string(credentialsId: 'vault_token', variable: 'vaultToken')]) {
+                    deployK8s '$vaultToken'
+            }
+        }
         
 
         stage('Build on Windows') {
             agent{ label 'windows-agent' }
             steps{
-                bat 'mvn clean package'
                 bat 'dir'
+                bat 'mvn clean package'
+                
                     
             }
         }
